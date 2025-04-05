@@ -5,11 +5,19 @@
  */
 package projet_class;
 
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rata
  */
 public class Page_acceil extends javax.swing.JFrame {
+    
+     Statement stmt;
+     Connexion maConnexion = new Connexion();
+
 
     /**
      * Creates new form Page_acceil
@@ -154,9 +162,9 @@ public class Page_acceil extends javax.swing.JFrame {
                 .addComponent(jLtitre, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)
                 .addComponent(enregistr_acceuil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
+                .addGap(90, 90, 90)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,7 +181,7 @@ public class Page_acceil extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addGap(211, 211, 211))
         );
 
         pack();
@@ -189,6 +197,23 @@ public class Page_acceil extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         String annee=jTannee.getText();
+       String etablissement=jTetabli.getText();
+       String chef=jTchef.getText();
+       String departement=jTdepartement.getText();
+       
+       String requete="INSERT INTO acceuil(annee,etablissement,chefdedep,dept) VALUES('"+annee+"','"+etablissement+"','"+chef+"','"+departement+"')";
+        try{
+            stmt=maConnexion.ObtenirConnexion().createStatement();
+            stmt.executeUpdate(requete);
+             JOptionPane.showMessageDialog(null,"BIENVENUE");
+             
+              }
+        catch(SQLException ex){
+            System.err.println(ex);
+            
+        }
+             
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -225,7 +250,6 @@ public class Page_acceil extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel enregistr_acceuil;
     private javax.swing.JButton jButton1;
